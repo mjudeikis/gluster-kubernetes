@@ -46,7 +46,7 @@ objects:
               memory: 100Mi
               cpu: 100m
           volumeMounts:
-          - name: glusterfs-heketi
+         - name: glusterfs-heketi
             mountPath: "/var/lib/heketi"
           - name: glusterfs-run
             mountPath: "/run"
@@ -70,6 +70,9 @@ objects:
             readOnly: true
           - name: kernel-modules
             mountPath: "/usr/lib/modules"
+            readOnly: true
+          - name: glusterfs-target
+            mountPath: "/etc/target"
             readOnly: true
           securityContext:
             capabilities: {}
@@ -130,6 +133,9 @@ objects:
         - name: kernel-modules
           hostPath:
             path: "/usr/lib/modules"
+        - name: glusterfs-target
+          hostPath:
+            path: "/etc/target"
         restartPolicy: Always
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
